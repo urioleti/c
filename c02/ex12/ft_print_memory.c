@@ -1,4 +1,3 @@
-
 #include <unistd.h>
 
 void	ft_putchar(char c)
@@ -51,16 +50,29 @@ void	*ft_print_memory(void *addr, unsigned int size)
 	i = -1;
 	while (str[++i] && i < (int)size)
 	{
-		str[i] ? ft_print_hex(str[i]) : ft_putchar(' ');
-		(i % 2 != 0) ? ft_putchar(' ') : 0;
+		if (str[i])
+			ft_print_hex(str[i]);
+		else
+			ft_putchar(' ');
+		if (i % 2 != 0)
+			ft_putchar(' ');
 	}
-	i < (int)size ? ft_print_hex('\0') : 0;
-	i += i < (int)size ? 1 : 0;
+	if (i < (int)size)
+		ft_print_hex('\0');
+	if (i < (int)size)
+		i += 1;
+	else
+		i += 0;
 	while (i++ < 17)
 		ft_putchar(' ');
 	i = -1;
 	while (++i < (int)size)
-		(str[i] >= 32 && str[i] <= 126) ? ft_putchar(str[i]) : ft_putchar('.');
+	{
+		if (str[i] >= 32 && str[i] <= 126)
+			ft_putchar(str[i]);
+		else
+			ft_putchar('.');
+	}
 	ft_putchar('\n');
 	return (addr);
 }
